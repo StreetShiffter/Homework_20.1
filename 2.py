@@ -18,19 +18,35 @@ cur = conn.cursor()
 
 cur.execute("""DROP TABLE IF EXISTS products""")
 
-cur.execute("""CREATE TABLE products (
-                product_id smallint NOT NULL,
-                product_name character varying(40) NOT NULL,
-                supplier_id smallint,
-                category_id smallint,
-                quantity_per_unit character varying(20),
-                unit_price real,
-                units_in_stock smallint,
-                units_on_order smallint,
-                reorder_level smallint,
-                discontinued integer NOT NULL)
-""")
+# cur.execute("""CREATE TABLE products (
+#                 product_id smallint NOT NULL,
+#                 product_name character varying(40) NOT NULL,
+#                 supplier_id smallint,
+#                 category_id smallint,
+#                 quantity_per_unit character varying(20),
+#                 unit_price real,
+#                 units_in_stock smallint,
+#                 units_on_order smallint,
+#                 reorder_level smallint,
+#                 discontinued integer NOT NULL)
+# """)
 conn.commit()
+#Можно сделать и так
+# cur.execute("""
+#     CREATE TABLE products (
+#         product_id smallint NOT NULL,
+#         product_name character varying(40) NOT NULL,
+#         supplier_id smallint,
+#         category_id smallint,
+#         quantity_per_unit character varying(20),
+#         unit_price real,
+#         units_in_stock smallint,
+#         units_on_order smallint,
+#         reorder_level smallint,
+#         discontinued integer NOT NULL,
+#         CONSTRAINT chk_products_discontinued CHECK (discontinued IN (0, 1))
+#     )
+# """)
 
 cur.execute("""INSERT INTO products VALUES
 (66, 'Louisiana Hot Spiced Okra', 2, 2, '24 - 8 oz jars', 17, 4, 100, 20, 0),
@@ -51,10 +67,10 @@ conn.commit()
 #Не удаляйте этот код - он нужен для корректной работы тренажера.
 # Пишете свой запрос ниже.
 
-cur.execute("""ALTER TABLE products
-ADD CONSTRAINT proverka_disc
-CHECK (discontinued = 0 or discontinued = 1)""")
-conn.commit()
+# cur.execute("""ALTER TABLE products
+# ADD CONSTRAINT proverka_disc
+# CHECK (discontinued = 0 or discontinued = 1)""")
+# conn.commit()
 
 cur.close()
 conn.close()
