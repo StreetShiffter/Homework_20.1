@@ -56,6 +56,8 @@ conn.commit()
 cur.execute("""ALTER TABLE products
 ADD CONSTRAINT proverka
 CHECK (unit_price > 0)""")
+
+
 conn.commit()
 
 cur.execute("SELECT * FROM products")
